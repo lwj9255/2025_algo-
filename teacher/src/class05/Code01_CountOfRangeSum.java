@@ -4,6 +4,7 @@ package class05;
 // https://leetcode.com/problems/count-of-range-sum/
 public class Code01_CountOfRangeSum {
 
+	// 计算前缀和
 	public static int countRangeSum(int[] nums, int lower, int upper) {
 		if (nums == null || nums.length == 0) {
 			return 0;
@@ -16,6 +17,8 @@ public class Code01_CountOfRangeSum {
 		return process(sum, 0, sum.length - 1, lower, upper);
 	}
 
+	// arr[L..R]已经不传进来了，只传进来sum(前缀和数组)
+	// 但求的依然是在原始的arr[L...R]中，有多少个子数组累加和在[lower,upper]上
 	public static int process(long[] sum, int L, int R, int lower, int upper) {
 		if (L == R) {
 			return sum[L] >= lower && sum[L] <= upper ? 1 : 0;

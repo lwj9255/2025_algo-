@@ -123,9 +123,9 @@ public class Code04_BiggerThanRightTwice {
 			int[] arr1 = generateRandomArray(maxSize, maxValue);
 			int[] arr2 = copyArray(arr1);
 			if (reversePairs(arr1) != comparator(arr2)) {
-				System.out.println("Oops!");
-				printArray(arr1);
+				System.out.println("Oops!");printArray(arr1);
 				printArray(arr2);
+
 				break;
 			}
 		}

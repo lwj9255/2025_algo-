@@ -51,7 +51,7 @@ public class Test_MergeSort {
         while (mergeSize < N) {
             int L = 0;
             while (L < N) {
-                if (L + mergeSize >= N ) {
+                if (L + mergeSize >= N) {
                     break;
                 }
                 int M = L + mergeSize - 1;
@@ -62,6 +62,31 @@ public class Test_MergeSort {
             // 防止溢出
             if (mergeSize > N / 2) {
                 break;
+            }
+            mergeSize <<= 1;
+        }
+    }
+
+    public static void mergeSort3(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+
+        int N = arr.length;
+        int mergeSize = 1;
+        while (mergeSize < N) {
+            int L = 0;
+            while (L < N) {
+                if (L + mergeSize >= N) {
+                    break;
+                }
+                int M = L + mergeSize - 1;
+                int R = Math.min(M + mergeSize, N - 1);
+                merge(arr, L, M, R);
+                L = R + 1;
+            }
+            if (mergeSize > N / 2) {
+                return;
             }
             mergeSize <<= 1;
         }
@@ -108,14 +133,14 @@ public class Test_MergeSort {
     }
 
     public static void main(String[] args) {
-        int maxSzie = 10000;
+        int maxSzie = 1000;
         int maxValue = 100;
         boolean succeed = true;
         for (int i = 0; i < 10000; i++) {
             int[] arr1 = randomArr(maxSzie, maxValue);
             int[] arr2 = copyArr(arr1);
             mergeSort1(arr1);
-            mergeSort2(arr2);
+            mergeSort3(arr2);
             if (!arrIsEqual(arr1, arr2)) {
                 succeed = false;
                 printArr(arr1);
@@ -129,7 +154,7 @@ public class Test_MergeSort {
         printArr(arr1);
         printArr(arr2);
         mergeSort1(arr1);
-        mergeSort2(arr2);
+        mergeSort3(arr2);
         printArr(arr1);
         printArr(arr2);
     }
