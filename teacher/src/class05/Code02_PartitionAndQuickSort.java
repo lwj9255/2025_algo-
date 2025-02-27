@@ -11,6 +11,7 @@ public class Code02_PartitionAndQuickSort {
 	// arr[L..R]上，以arr[R]位置的数做划分值
 	// <= X > X
 	// <= X X
+	// 返回arr[R]应该在的位置，左侧都小于等于它，右侧都大于它
 	public static int partition(int[] arr, int L, int R) {
 		if (L > R) {
 			return -1;
@@ -30,8 +31,9 @@ public class Code02_PartitionAndQuickSort {
 		return lessEqual;
 	}
 
-	// arr[L...R] 玩荷兰国旗问题的划分，以arr[R]做划分值
+	// arr[L...R] 荷兰国旗问题的划分，以arr[R]做划分值
 	// <arr[R] ==arr[R] > arr[R]
+	// 返回一个数组，第一个数到第二个数之间都是arr[R]，左侧都比arr[R]小，右侧都比arr[R]大
 	public static int[] netherlandsFlag(int[] arr, int L, int R) {
 		if (L > R) { // L...R L>R
 			return new int[] { -1, -1 };
@@ -58,6 +60,8 @@ public class Code02_PartitionAndQuickSort {
 		return new int[] { less + 1, more };
 	}
 
+	// 快排1.0
+	// 每次最右侧数摆在该摆的位置，左右两侧是比他小/大的数
 	public static void quickSort1(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
@@ -79,7 +83,8 @@ public class Code02_PartitionAndQuickSort {
 	
 	
 	
-	
+	// 快排2.0
+	// 每次选最右侧数，相同的摆在一起，左右是比他小/大的数
 	public static void quickSort2(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
@@ -103,7 +108,9 @@ public class Code02_PartitionAndQuickSort {
 	
 	
 	
-	
+	// 快排3.0
+	// 每次从左到右随机选一个数来排
+	// 其余和2.0一样
 	public static void quickSort3(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
