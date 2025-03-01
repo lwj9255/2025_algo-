@@ -9,7 +9,7 @@ public class Code04_SortArrayDistanceLessK {
 		if (k == 0) {
 			return;
 		}
-		// 默认小根堆
+		// PriorityQueue是优先级队列，优先级最高的元素会显出队。默认小根堆，也可以自己改比较器来控制什么是优先级
 		PriorityQueue<Integer> heap = new PriorityQueue<>();
 		int index = 0;
 		// 0...K-1

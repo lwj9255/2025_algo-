@@ -57,7 +57,7 @@ public class Code02_Heap {
 		// 停：较大的孩子都不再比index位置的数大；已经没孩子了
 		private void heapify(int[] arr, int index, int heapSize) {
 			int left = index * 2 + 1;
-			while (left < heapSize) { // 如果有左孩子，有没有右孩子，可能有可能没有！
+			while (left < heapSize) { // 如果有左孩子，有没有右孩子?可能有可能没有！
 				// 把较大孩子的下标，给largest
 				int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
 				largest = arr[largest] > arr[index] ? largest : index;
