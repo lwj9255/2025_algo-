@@ -13,7 +13,7 @@ public class HeapGreater<T> {
 	private ArrayList<T> heap;
 	private HashMap<T, Integer> indexMap;
 	private int heapSize;
-	private Comparator<? super T> comp;
+	private Comparator<? super T> comp; // ? super T 表示一个未知的类型，这个类型是 T 或者 T 的父类
 
 	public HeapGreater(Comparator<? super T> c) {
 		heap = new ArrayList<>();

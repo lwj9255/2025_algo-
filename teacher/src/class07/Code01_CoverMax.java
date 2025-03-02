@@ -36,7 +36,7 @@ public class Code01_CoverMax {
 		PriorityQueue<Integer> heap = new PriorityQueue<>();
 		int max = 0;
 		for (int i = 0; i < lines.length; i++) {
-			// lines[i] -> cur 在黑盒中，把<=cur.start 东西都弹出
+			// 把<=lines[i].start 东西都弹出
 			while (!heap.isEmpty() && heap.peek() <= lines[i].start) {
 				heap.poll();
 			}
@@ -74,7 +74,7 @@ public class Code01_CoverMax {
 		// 如下的code，就是根据每一个线段的开始位置排序
 		// 比如, m = { {5,7}, {1,4}, {2,6} } 跑完如下的code之后变成：{ {1,4}, {2,6}, {5,7} }
 		Arrays.sort(m, (a, b) -> (a[0] - b[0]));
-		// 准备好小根堆，和课堂的说法一样
+		// 准备好小根堆
 		PriorityQueue<Integer> heap = new PriorityQueue<>();
 		int max = 0;
 		for (int[] line : m) {
@@ -104,12 +104,10 @@ public class Code01_CoverMax {
 	}
 
 	public static class StartComparator implements Comparator<Line> {
-
 		@Override
 		public int compare(Line o1, Line o2) {
 			return o1.start - o2.start;
 		}
-
 	}
 
 	public static void main(String[] args) {
