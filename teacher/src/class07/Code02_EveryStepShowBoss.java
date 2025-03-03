@@ -52,10 +52,13 @@ public class Code02_EveryStepShowBoss {
 
 		// 当前处理i号事件，arr[i] -> id,  buyOrRefund
 		public void operate(int time, int id, boolean buyOrRefund) {
+			// 如果是退货并且之前没买过，视为不存在这个事件
 			if (!buyOrRefund && !customers.containsKey(id)) {
 				return;
 			}
+			// 如果之前没买过
 			if (!customers.containsKey(id)) {
+				// 在客户里加上该客户，初始化为订单数为0（在判断是否购买时再对订单进行调整），进入时间也是0（在进堆时再调整）
 				customers.put(id, new Customer(id, 0, 0));
 			}
 			Customer c = customers.get(id);
@@ -67,20 +70,26 @@ public class Code02_EveryStepShowBoss {
 			if (c.buy == 0) {
 				customers.remove(id);
 			}
+			// 如果候选堆和得奖堆都不存在这个客户，说明该客户是新进来的
 			if (!candHeap.contains(c) && !daddyHeap.contains(c)) {
+				// 如果得奖堆还没满，这会发生在刚开始不久的时候
 				if (daddyHeap.size() < daddyLimit) {
+					// 将进堆时间换成现在的时间
 					c.enterTime = time;
 					daddyHeap.push(c);
 				} else {
+					// 得奖堆满了的话，就放入候选堆中
 					c.enterTime = time;
 					candHeap.push(c);
 				}
+			// 如果在候选堆中
 			} else if (candHeap.contains(c)) {
 				if (c.buy == 0) {
 					candHeap.remove(c);
 				} else {
 					candHeap.resign(c);
 				}
+			// 如果在得奖堆中
 			} else {
 				if (c.buy == 0) {
 					daddyHeap.remove(c);
