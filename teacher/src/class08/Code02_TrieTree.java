@@ -36,7 +36,7 @@ public class Code02_TrieTree {
 			if (word == null) {
 				return;
 			}
-			char[] str = word.toCharArray();
+			char[] str = word.toCharArray();// 把字符串拆分成一个个字符
 			Node1 node = root;
 			node.pass++;
 			int path = 0;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Code04_RadixSort {
 
-	// only for no-negative value
+	// 只适用于非负值
 	public static void radixSort(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
