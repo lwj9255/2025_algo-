@@ -11,7 +11,7 @@ public class Test_HeapGreater<T> {
     private HashMap<T, Integer> indexMap;
     private Comparator<? super T> comp;
 
-    public Test_HeapGreater(Comparator comp) {
+    public Test_HeapGreater(Comparator<? super T> comp) {
         this.comp = comp;
         heapsize = 0;
         heap = new ArrayList<>();
@@ -44,7 +44,8 @@ public class Test_HeapGreater<T> {
         T ans = heap.get(0);
         swap(0, heapsize - 1);
         indexMap.remove(ans);
-        heap.remove(--heapsize);
+        heap.remove(heapsize - 1);
+        heapsize--;
         heapify(0);
         return ans;
     }

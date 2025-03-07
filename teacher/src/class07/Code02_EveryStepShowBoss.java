@@ -6,7 +6,21 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Code02_EveryStepShowBoss {
+	public static List<List<Integer>> topK(int[] arr, boolean[] op, int k) {
+		List<List<Integer>> ans = new ArrayList<>();
+		WhosYourDaddy whoDaddies = new WhosYourDaddy(k);
+		// 从0号事件开始
+		for (int i = 0; i < arr.length; i++) {
+			//
+			whoDaddies.operate(i, arr[i], op[i]);
+			ans.add(whoDaddies.getDaddies());
+		}
+		return ans;
+	}
 
+	/**
+	 * 客户类
+	 */
 	public static class Customer {
 		public int id;
 		public int buy;
@@ -19,6 +33,11 @@ public class Code02_EveryStepShowBoss {
 		}
 	}
 
+	/**
+	 * 候选区比较器
+	 * 如果o1和o2的订单数不同，则比较订单数，大的在前面
+	 * 如果订单数相同，则比较进入时间，小的（早的）在前面
+	 */
 	public static class CandidateComparator implements Comparator<Customer> {
 
 		@Override
@@ -28,6 +47,11 @@ public class Code02_EveryStepShowBoss {
 
 	}
 
+	/**
+	 * 得奖区比较器
+	 * 如果o1和o2的订单数不同，则比较订单数，小的在前面
+	 * 如果订单数相同，则比较进入时间，小的（早的）在前面
+	 */
 	public static class DaddyComparator implements Comparator<Customer> {
 
 		@Override
@@ -37,6 +61,9 @@ public class Code02_EveryStepShowBoss {
 
 	}
 
+	/**
+	 * 找出得奖者
+	 */
 	public static class WhosYourDaddy {
 		private HashMap<Integer, Customer> customers;
 		private HeapGreater<Customer> candHeap;
@@ -131,15 +158,7 @@ public class Code02_EveryStepShowBoss {
 
 	}
 
-	public static List<List<Integer>> topK(int[] arr, boolean[] op, int k) {
-		List<List<Integer>> ans = new ArrayList<>();
-		WhosYourDaddy whoDaddies = new WhosYourDaddy(k);
-		for (int i = 0; i < arr.length; i++) {
-			whoDaddies.operate(i, arr[i], op[i]);
-			ans.add(whoDaddies.getDaddies());
-		}
-		return ans;
-	}
+
 
 	// 干完所有的事，模拟，不优化
 	public static List<List<Integer>> compare(int[] arr, boolean[] op, int k) {
