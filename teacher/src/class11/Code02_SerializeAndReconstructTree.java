@@ -31,6 +31,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 先序遍历序列化
 	public static Queue<String> preSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		pres(head, ans);
@@ -47,6 +48,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 中序遍历序列化
 	public static Queue<String> inSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		ins(head, ans);
@@ -63,6 +65,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 后序遍历序列化
 	public static Queue<String> posSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		poss(head, ans);
@@ -78,6 +81,7 @@ public class Code02_SerializeAndReconstructTree {
 			ans.add(String.valueOf(head.value));
 		}
 	}
+
 
 	public static Node buildByPreQueue(Queue<String> prelist) {
 		if (prelist == null || prelist.size() == 0) {

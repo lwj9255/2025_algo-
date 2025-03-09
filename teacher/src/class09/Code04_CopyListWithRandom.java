@@ -20,7 +20,7 @@ public class Code04_CopyListWithRandom {
 	public static Node copyRandomList1(Node head) {
 		// key 老节点
 		// value 新节点
-		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		HashMap<Node, Node> map = new HashMap<>();
 		Node cur = head;
 		while (cur != null) {
 			map.put(cur, new Node(cur.val));

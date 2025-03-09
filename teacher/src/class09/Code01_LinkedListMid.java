@@ -19,8 +19,8 @@ public class Code01_LinkedListMid {
 			return head;
 		}
 		// 链表有3个点或以上
-		Node slow = head.next;
-		Node fast = head.next.next;
+		Node slow = head;
+		Node fast = head;
 		while (fast.next != null && fast.next.next != null) {
 			slow = slow.next;
 			fast = fast.next.next;
