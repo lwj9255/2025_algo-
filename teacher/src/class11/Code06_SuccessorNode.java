@@ -17,11 +17,16 @@ public class Code06_SuccessorNode {
 		if (node == null) {
 			return node;
 		}
+		// 如果有右孩子
 		if (node.right != null) {
+			// 找右孩子中最左的节点
 			return getLeftMost(node.right);
-		} else { // 无右子树
+		// 如果无右孩子
+		} else {
+			// 一直往上找，直到找到作为左孩子的父节点
 			Node parent = node.parent;
-			while (parent != null && parent.right == node) { // 当前节点是其父亲节点右孩子
+			// 如果当前节点是其父亲节点右孩子
+			while (parent != null && parent.right == node) {
 				node = parent;
 				parent = node.parent;
 			}

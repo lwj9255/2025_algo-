@@ -6,7 +6,7 @@ import java.util.List;
 // 本题测试链接：https://leetcode.com/problems/encode-n-ary-tree-to-binary-tree
 public class Code03_EncodeNaryTreeToBinaryTree {
 
-	// 提交时不要提交这个类
+	// N叉树节点
 	public static class Node {
 		public int val;
 		public List<Node> children;
@@ -24,7 +24,7 @@ public class Code03_EncodeNaryTreeToBinaryTree {
 		}
 	};
 
-	// 提交时不要提交这个类
+	// 二叉树节点
 	public static class TreeNode {
 		int val;
 		TreeNode left;
@@ -35,35 +35,39 @@ public class Code03_EncodeNaryTreeToBinaryTree {
 		}
 	}
 
-	// 只提交这个类即可
-	class Codec {
-		// Encodes an n-ary tree to a binary tree.
-		public TreeNode encode(Node root) {
-			if (root == null) {
+	class EncodeNaryTreeToBinaryTree {
+
+		// 将N叉树节点变成二叉树节点
+		public TreeNode encode(Node node) {
+			if (node == null) {
 				return null;
 			}
-			TreeNode head = new TreeNode(root.val);
-			head.left = en(root.children);
-			return head;
+			TreeNode t = new TreeNode(node.val);
+			// 头节点的孩子节点也要变成二叉树
+			t.left = en(node.children);
+			return t;
 		}
 
+		// N叉树节点的孩子节点中，最左侧的一个作为左孩子，剩余的作为该左孩子的右孩子
 		private TreeNode en(List<Node> children) {
 			TreeNode head = null;
 			TreeNode cur = null;
 			for (Node child : children) {
 				TreeNode tNode = new TreeNode(child.val);
+				// 第一个孩子作为头节点
 				if (head == null) {
 					head = tNode;
 				} else {
-					cur.right = tNode;
+					cur.right = tNode; // 剩余节点作为右孩子
 				}
 				cur = tNode;
+				// 如果该节点还有孩子节点，递归
 				cur.left = en(child.children);
 			}
 			return head;
 		}
 
-		// Decodes your binary tree to an n-ary tree.
+		// 二叉树变成N叉树
 		public Node decode(TreeNode root) {
 			if (root == null) {
 				return null;
@@ -73,7 +77,9 @@ public class Code03_EncodeNaryTreeToBinaryTree {
 
 		public List<Node> de(TreeNode root) {
 			List<Node> children = new ArrayList<>();
+			// 如果为空则直接返回 base case
 			while (root != null) {
+				// 如果不为空则递归调用，直到该节点的左孩子
 				Node cur = new Node(root.val, de(root.left));
 				children.add(cur);
 				root = root.right;

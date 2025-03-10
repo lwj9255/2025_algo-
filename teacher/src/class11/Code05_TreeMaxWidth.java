@@ -16,6 +16,7 @@ public class Code05_TreeMaxWidth {
 		}
 	}
 
+	// 用map实现
 	public static int maxWidthUseMap(Node head) {
 		if (head == null) {
 			return 0;
@@ -23,31 +24,36 @@ public class Code05_TreeMaxWidth {
 		Queue<Node> queue = new LinkedList<>();
 		queue.add(head);
 		// key 在 哪一层，value
-		HashMap<Node, Integer> levelMap = new HashMap<>();
-		levelMap.put(head, 1);
+		HashMap<Node, Integer> map = new HashMap<>();
+		map.put(head, 1);
 		int curLevel = 1; // 当前你正在统计哪一层的宽度
-		int curLevelNodes = 0; // 当前层curLevel层，宽度目前是多少
-		int max = 0;
+		int width = 0; // 当前层curLevel层，宽度目前是多少
+		int max = 0;// 记录最大值
 		while (!queue.isEmpty()) {
 			Node cur = queue.poll();
-			int curNodeLevel = levelMap.get(cur);
+			int nodeLevel = map.get(cur);// 查看现在遍历到的节点的层
 			if (cur.left != null) {
-				levelMap.put(cur.left, curNodeLevel + 1);
+				map.put(cur.left, nodeLevel + 1);
 				queue.add(cur.left);
 			}
 			if (cur.right != null) {
-				levelMap.put(cur.right, curNodeLevel + 1);
+				map.put(cur.right, nodeLevel + 1);
 				queue.add(cur.right);
 			}
-			if (curNodeLevel == curLevel) {
-				curLevelNodes++;
+			// 如果遍历到的节点就在当前统计的层
+			if (nodeLevel == curLevel) {
+				width++;
+				// 如果不在，那说明之前的层已经统计完了
 			} else {
-				max = Math.max(max, curLevelNodes);
+				// 更新一下max的值
+				max = Math.max(max, width);
+				// 统计的层+1
 				curLevel++;
-				curLevelNodes = 1;
+				// 宽度重设为1
+				width = 1;
 			}
 		}
-		max = Math.max(max, curLevelNodes);
+		max = Math.max(max, width);
 		return max;
 	}
 
@@ -60,7 +66,7 @@ public class Code05_TreeMaxWidth {
 		Node curEnd = head; // 当前层，最右节点是谁
 		Node nextEnd = null; // 下一层，最右节点是谁
 		int max = 0;
-		int curLevelNodes = 0; // 当前层的节点数
+		int width = 0; // 当前层的节点数
 		while (!queue.isEmpty()) {
 			Node cur = queue.poll();
 			if (cur.left != null) {
@@ -71,10 +77,10 @@ public class Code05_TreeMaxWidth {
 				queue.add(cur.right);
 				nextEnd = cur.right;
 			}
-			curLevelNodes++;
+			width++;
 			if (cur == curEnd) {
-				max = Math.max(max, curLevelNodes);
-				curLevelNodes = 0;
+				max = Math.max(max, width);
+				width = 0;
 				curEnd = nextEnd;
 			}
 		}
