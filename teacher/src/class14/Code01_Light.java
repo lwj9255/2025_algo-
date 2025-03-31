@@ -18,21 +18,23 @@ public class Code01_Light {
 		if (index == str.length) { // 结束的时候
 			for (int i = 0; i < str.length; i++) {
 				if (str[i] != 'X') { // 当前位置是点的话
+					// 检查该位置以及其左右位置是否有灯
 					if (!lights.contains(i - 1) && !lights.contains(i) && !lights.contains(i + 1)) {
-						return Integer.MAX_VALUE;
+						return Integer.MAX_VALUE;// 说明这种放灯方案无法照亮该居民点
 					}
 				}
 			}
-			return lights.size();
+			return lights.size();// 所有居民点都被照亮，返回灯的个数
 		} else { // str还没结束
-			// i X .
-			int no = process(str, index + 1, lights);
+			int no = process(str, index + 1, lights);// 不在当前位置放灯的情况
 			int yes = Integer.MAX_VALUE;
+			// 只有在当前位置是'.'时，才考虑放灯（因为'X'不能放灯）
 			if (str[index] == '.') {
-				lights.add(index);
-				yes = process(str, index + 1, lights);
-				lights.remove(index);
+				lights.add(index);// 在当前位置放灯
+				yes = process(str, index + 1, lights);// 递归处理下一个位置
+				lights.remove(index);// 回溯，撤销在当前位置放灯的决定
 			}
+			// 返回两种选择中，灯数更少的那一种
 			return Math.min(no, yes);
 		}
 	}

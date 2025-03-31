@@ -2,6 +2,9 @@ package class12;
 
 import java.util.LinkedList;
 
+/**
+ * 完全二叉树
+ */
 public class Code01_IsCBT {
 
 	public static class Node {

@@ -12,6 +12,7 @@ public class Code03_NumberOfIslandsII {
 	public static List<Integer> numIslands21(int m, int n, int[][] positions) {
 		UnionFind1 uf = new UnionFind1(m, n);
 		List<Integer> ans = new ArrayList<>();
+		// 每一步空降一个位置
 		for (int[] position : positions) {
 			ans.add(uf.connect(position[0], position[1]));
 		}
@@ -37,7 +38,7 @@ public class Code03_NumberOfIslandsII {
 		}
 
 		private int index(int r, int c) {
-			return r * col + c;
+			return r * col + c;// 如果matrix太大，会导致溢出
 		}
 
 		private int find(int i) {
@@ -77,7 +78,9 @@ public class Code03_NumberOfIslandsII {
 
 		public int connect(int r, int c) {
 			int index = index(r, c);
+			// 如果这个位置的size是0，说明这次空降的1在这个位置是第一次出现
 			if (size[index] == 0) {
+				// 第一次出现，为自己建并查集
 				parent[index] = index;
 				size[index] = 1;
 				sets++;

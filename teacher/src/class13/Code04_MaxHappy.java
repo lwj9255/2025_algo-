@@ -71,7 +71,6 @@ public class Code04_MaxHappy {
 			Info nextInfo = process(next);
 			no += Math.max(nextInfo.no, nextInfo.yes);
 			yes += nextInfo.no;
-
 		}
 		return new Info(no, yes);
 	}
